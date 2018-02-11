@@ -1,4 +1,19 @@
-[![Build Status](https://travis-ci.org/microservices-demo/microservices-demo.svg?branch=master)](https://travis-ci.org/microservices-demo/microservices-demo)
+# Forking details from Willis Morse
+
+The original Sock Shop demo includes a monolithic web app built using static HTML and JQuery dynamic glue.
+
+This fork adds an additional front end built using more of a microfrontend architecture. This fork also adds a some minor changes that allow Sock Shop to run under a local Minikube installation.
+
+
+## To install in minikube
+
+```
+kubectl create -f deploy/kubernetes/manifests/sock-shop-ns.yaml -f deploy/kubernetes/manifests
+```
+
+
+# Original Sock Shop readme
+
 
 # Sock Shop : A Microservice Demo Application
 
