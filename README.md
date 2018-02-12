@@ -42,7 +42,7 @@ brew install kubectl
 
 
 ## To start Minikube
-Once you have all the prerequisites tools set up, you can fire up minikube for the first time using the following command:
+Once you have all the prerequisite tools set up, you can fire up Minikube for the first time using the following command:
 
 ```
 # The FIRST time you start minikube, you will bake the memory size into the virtualbox image forevermore. 
@@ -53,7 +53,7 @@ minikube start --memory=8096
 
 # If you forget to set enough memory during first start, you will have to delete the entire cluster and run start again (along with all subsequent kubernates cluster setup):
 
-mk delete
+minikube delete
 minikube start --memory=8096
 ```
 
