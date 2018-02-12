@@ -1,18 +1,90 @@
-# Forking details from Willis Morse
+# This is a forked copy of WeaveWorks' microservices-demo
 
-The original Sock Shop demo includes a monolithic web app built using static HTML and JQuery dynamic glue.
+The original [microservices-demo Github repo](https://github.com/microservices-demo/microservices-demo) provides configurations to deploy a collection of microservices that together present a company catalog site for a fictional company called "The Sock Shop". 
 
-This fork adds an additional front end built using more of a microfrontend architecture. This fork also adds a some minor changes that allow Sock Shop to run under a local Minikube installation.
+The configurations in this repo simply pull pre-built container images in order to deploy. However, the source that produces these images are available as [sibling GitHub repos](https://github.com/microservices-demo). 
+
+The original demo includes a monolithic web app built using static HTML and JQuery dynamic glue. This fork will be used to add deployment configurations for an additional front end repo that demonstrates a web site built from a collection of microfrontend services. 
+
+This fork also adds a some minor changes that allow Sock Shop to run under a local Minikube installation (currently, this is just a modification to `deploy/kubernetes/manifests/front-end-svc.yaml` that opens an external endpoint in a way that is supported by Minikube).
+
+## Tool Prerequisites
+[Minikube](https://github.com/kubernetes/minikube) is a tool that makes it easy to run Kubernetes locally. Minikube runs a single-node Kubernetes cluster inside a VM on your laptop for users looking to try out Kubernetes or develop with it day-to-day.
+
+Here are the tooling prerequisites to get started:
 
 
-## To install in minikube
+### **Virtual machine**
+Minikube requires a virtual machine in which to execute. Virtualbox seems to be the generally agreed-upon standard these days. There are alternatives, such as VMWare Fusion on Mac, but they don't seem to behave as well. Install Virtualbox via Homebrew:
 
 ```
+brew cask install virtualbox
+```
+
+Alternatively, download the full binary installer with admin GUI from Oracle: 
+https://www.virtualbox.org/wiki/Downloads
+
+### **Minikube**
+Bundles a kubernetes implementation with additional admin tools, including a dashboard. Install using Homebrew:
+```
+brew cask install minikube
+```
+
+### **kubectl** command
+[`kubectl`](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-with-homebrew-on-macos) provides important commandline admin tools for kubernates:
+
+```
+brew install kubectl
+```
+
+### **kube-shell** command (optional)
+[`kube-shell`](https://github.com/cloudnativelabs/kube-shell) provides a commandline Python tool that wraps `kubectl` and provides autocompletion and other conveniences. Currently it can only be installed using `pip`, so it's a little messy to set up, but Homebrew support is [a reported issue](https://github.com/cloudnativelabs/kube-shell/issues/45) to track.
+
+
+## To start Minikube
+Once you have all the prerequisites tools set up, you can fire up minikube for the first time using the following command:
+
+```
+# The FIRST time you start minikube, you will bake the memory size into the virtualbox image forevermore. 
+# Subsequent calls to start with a different memory parameter will ignore your request for more memory.
+# Minikube's default memory is around 2GB, but you will need upwards of 8GB to reliably run the Sock Shop demo cluster.
+
+minikube start --memory=8096
+
+# If you forget to set enough memory during first start, you will have to delete the entire cluster and run start again (along with all subsequent kubernates cluster setup):
+
+mk delete
+minikube start --memory=8096
+```
+
+## To install Sock Shop in Minikube
+Once you have Minikub installed and running, you can run the kubernates scripts to pull containers and set up the cluster:
+
+```
+cd <microservices-demo project folder>
 kubectl create -f deploy/kubernetes/manifests/sock-shop-ns.yaml -f deploy/kubernetes/manifests
 ```
 
+## To monitor the load process
+Open the Minikube dashboard:
 
-# Original Sock Shop readme
+```
+minikube dashboard
+```
+
+Choose `sock-shop` from the Namespaces dropdown and press the Overview link. You will see graphs and lists for all Sock Shop cluster resources.
+
+
+## To view The Sock Shop monolithic frontend
+Once all Deployements and Services are all running at 100% and green, browse to 
+
+```
+http://192.168.99.100:30656
+```
+
+<br><br><br><br>
+
+# Original microservices-demo readme
 
 
 # Sock Shop : A Microservice Demo Application
