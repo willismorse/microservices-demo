@@ -17,7 +17,7 @@ spec:
       containers:
         - name: hostapp
           image: "willismorse/microservices-demo-microfrontend-hostapp:latest"
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 8080
