@@ -40,6 +40,25 @@ brew install kubectl
 ### **kube-shell** command (optional)
 [`kube-shell`](https://github.com/cloudnativelabs/kube-shell) provides a commandline Python tool that wraps `kubectl` and provides autocompletion and other conveniences. Currently it can only be installed using `pip`, so it's a little messy to set up, but Homebrew support is [a reported issue](https://github.com/cloudnativelabs/kube-shell/issues/45) to track.
 
+### Helm
+[Helm](https://github.com/kubernetes/helm) is a tool that provides higher level design abstractions on top of Kubernates. With Helm, you define your cluster's container and infrastructure architecture by writing simple templatized yaml config files (aka - "Charts"). 
+
+Helm is a build tool that runs locally on your development machine or as a CI process. Helm uses your charts to generate all the requisite Kubernates deployment files. Once Helm has generated these files, you can choose to run these files immediately on your cluster, or package them up in a standardized tar format to serve as sharable deployment artifacts.
+
+Install Helm in your liocal dev machine:
+
+```
+brew install kubernetes-helm
+```
+
+Helm includes an additional tool called Tiller, a server-side component that runs inside your cluster to aid in deployment. Once you have Helm installed on your local machine, you can use it to install Tiller into your cluster. (Note that the Tiller installation will discover your cluster by reading your kubectl config; in the case of local Minikube-based development this is most likely what you want):
+
+```
+helm init
+```
+
+
+
 
 ## To start Minikube
 Once you have all the prerequisite tools set up, you can fire up Minikube for the first time using the following command:
