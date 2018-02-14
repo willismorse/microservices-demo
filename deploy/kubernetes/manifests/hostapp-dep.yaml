@@ -3,20 +3,16 @@ apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: hostapp
-  labels:
-    app: hostapp
-    chart: hostapp-0.1.0
-    heritage: Tiller
+  namespace: sock-shop
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hostapp
-      release: agile-giraffe
+      name: hostapp
   template:
     metadata:
       labels:
-        app: hostapp
+        name: hostapp
     spec:
       containers:
         - name: hostapp

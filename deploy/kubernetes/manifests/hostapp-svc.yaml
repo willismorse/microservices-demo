@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: hostapp
   labels:
-    app: hostapp
+    name: hostapp
     chart: hostapp-0.1.0
     heritage: Tiller
 spec:
@@ -15,4 +15,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: hostapp
+    name: hostapp
