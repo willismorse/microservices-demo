@@ -650,3 +650,63 @@ spec:
     targetPort: 80
   selector:
     name: user
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hostapp
+  labels:
+    app: hostapp
+    chart: hostapp-0.1.0
+    release: agile-giraffe
+    heritage: Tiller
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: hostapp
+    release: agile-giraffe
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: hostapp
+  labels:
+    app: hostapp
+    chart: hostapp-0.1.0
+    release: agile-giraffe
+    heritage: Tiller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hostapp
+      release: agile-giraffe
+  template:
+    metadata:
+      labels:
+        app: hostapp
+        release: agile-giraffe
+    spec:
+      containers:
+        - name: hostapp
+          image: "willismorse/microservices-demo-microfrontend-hostapp:latest"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {}
