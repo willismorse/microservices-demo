@@ -133,6 +133,7 @@ items:
         weave-scope-component: app
       namespace: weave
     spec:
+      type: NodePort
       ports:
         - name: app
           port: 80
