@@ -4,7 +4,7 @@ metadata:
   name: microfrontend-ingress
   namespace: sock-shop
   annotations:
-    ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
 #   backend:
 #     serviceName: default-http-backend
