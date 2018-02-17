@@ -6,17 +6,10 @@ metadata:
   annotations:
     ingress.kubernetes.io/rewrite-target: /
 spec:
-  backend:
-    serviceName: default-http-backend
-    servicePort: 8080
+#   backend:
+#     serviceName: default-http-backend
+#     servicePort: 8080
   rules:
-  - host: 
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: hostapp
-          servicePort: 8080
   - host:
     http:
       paths:
@@ -27,7 +20,29 @@ spec:
   - host:
     http:
       paths:
+      - path: /hostapp
+        backend:
+          serviceName: hostapp
+          servicePort: 8080    
+  - host:
+    http:
+      paths:
+      - path: /header
+        backend:
+          serviceName: header
+          servicePort: 8080                          
+  - host:
+    http:
+      paths:
       - path: /api/catalogue
         backend:
           serviceName: catalogue
           servicePort: 80
+  - host: 
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: hostapp
+          servicePort: 8080
+          
