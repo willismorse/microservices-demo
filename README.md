@@ -30,11 +30,7 @@ Bundles a kubernetes implementation with additional admin tools, including a das
 brew cask install minikube
 ```
 
-### **Enable Ingress in Minikube**
-Kubernetes Ingress is an optional feauture in Minkiube, so you must explicitly enable it:
-```
-minikube addons enable ingress
-```
+
 
 ### **kubectl** command
 [`kubectl`](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-with-homebrew-on-macos) provides important commandline admin tools for kubernates:
@@ -80,6 +76,12 @@ minikube start --memory=8096
 
 minikube delete
 minikube start --memory=8096
+```
+
+### **Enable Ingress in Minikube**
+Kubernetes Ingress is an optional feauture in Minkiube, so you must explicitly enable it:
+```
+minikube addons enable ingress
 ```
 
 ## To install Sock Shop in Minikube
